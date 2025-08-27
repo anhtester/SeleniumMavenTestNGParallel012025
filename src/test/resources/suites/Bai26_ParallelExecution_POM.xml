@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite Demo Parallel Testing By Methods" verbose="1">
+   <test name="Login Test" parallel="methods" thread-count="4">
+      <classes>
+         <class name="com.anhtester.Bai26_ParallelExecution_POM.testcases.LoginTest"/>
+      </classes>
+   </test>
+   <test name="Dashboard Test" parallel="methods" thread-count="3">
+      <classes>
+         <class name="com.anhtester.Bai26_ParallelExecution_POM.testcases.DashboardTest"/>
+      </classes>
+   </test>
+   <test name="Customer Test" parallel="methods" thread-count="2">
+      <classes>
+         <class name="com.anhtester.Bai26_ParallelExecution_POM.testcases.CustomerTest"/>
+      </classes>
+   </test>
+</suite>
