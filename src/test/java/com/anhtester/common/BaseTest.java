@@ -1,28 +1,48 @@
 package com.anhtester.common;
 
 import com.anhtester.drivers.DriverManager;
+import com.anhtester.helpers.PropertiesHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 public class BaseTest {
    public SoftAssert softAssert;
 
+   @BeforeSuite
+   public void setupBeforeSuite() {
+      PropertiesHelper.loadAllFiles();
+   }
+
    @BeforeMethod
    @Parameters({"browser"})
    public void createDriver(@Optional("chrome") String browserName) {
       WebDriver driver;
+
+      if (PropertiesHelper.getValue("browser").isEmpty() || PropertiesHelper.getValue("browser") == null) {
+         browserName = browserName;
+      } else {
+         browserName = PropertiesHelper.getValue("browser");
+      }
+
       switch (browserName.trim().toLowerCase()) {
          case "chrome":
             System.out.println("Launching Chrome browser...");
-            driver = new ChromeDriver();
+
+            ChromeOptions options = new ChromeOptions();
+
+            if (PropertiesHelper.getValue("headless").equalsIgnoreCase("true")) {
+               options.addArguments("--headless=new"); // chạy headless
+               options.addArguments("--window-size=" + PropertiesHelper.getValue("window_size")); // set kích thước
+            }
+
+            driver = new ChromeDriver(options);
+
             break;
          case "firefox":
             System.out.println("Launching Firefox browser...");
@@ -40,7 +60,10 @@ public class BaseTest {
 
       DriverManager.setDriver(driver);
 
-      DriverManager.getDriver().manage().window().maximize();
+      if (PropertiesHelper.getValue("headless").equalsIgnoreCase("false")) {
+         DriverManager.getDriver().manage().window().maximize();
+      }
+
       softAssert = new SoftAssert();
    }
 

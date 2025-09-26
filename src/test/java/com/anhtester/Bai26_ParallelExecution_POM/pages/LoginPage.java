@@ -1,5 +1,6 @@
 package com.anhtester.Bai26_ParallelExecution_POM.pages;
 
+import com.anhtester.helpers.PropertiesHelper;
 import com.anhtester.keywords.WebUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -29,7 +30,7 @@ public class LoginPage extends BasePage {
    }
 
    public void navigateToLoginAdminPage() {
-      WebUI.openURL(url_login_admin);
+      WebUI.openURL(PropertiesHelper.getValue("url"));
       WebUI.waitForPageLoaded();
    }
 
@@ -55,8 +56,8 @@ public class LoginPage extends BasePage {
 
    public DashboardPage loginCRM() {
       navigateToLoginAdminPage();
-      enterEmail("admin@example.com");
-      enterPassword("123456");
+      enterEmail(PropertiesHelper.getValue("email"));
+      enterPassword(PropertiesHelper.getValue("password"));
       clickLoginButton();
       WebUI.waitForPageLoaded();
       verifyLoginSuccess();

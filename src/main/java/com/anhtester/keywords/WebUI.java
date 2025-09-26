@@ -1,6 +1,7 @@
 package com.anhtester.keywords;
 
 import com.anhtester.drivers.DriverManager;
+import com.anhtester.helpers.PropertiesHelper;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -15,9 +16,9 @@ import java.util.List;
 
 public class WebUI {
 
-   private static int WAIT_TIMEOUT = 10;
-   private static double STEP_TIME = 0;
-   private static int PAGE_LOAD_TIMEOUT = 20;
+   private static int WAIT_TIMEOUT = Integer.parseInt(PropertiesHelper.getValue("wait_timeout"));
+   private static double STEP_TIME = Double.parseDouble(PropertiesHelper.getValue("step_time"));
+   private static int PAGE_LOAD_TIMEOUT = Integer.parseInt(PropertiesHelper.getValue("page_load_timeout"));
 
    public static void logConsole(Object message) {
       System.out.println(message);
