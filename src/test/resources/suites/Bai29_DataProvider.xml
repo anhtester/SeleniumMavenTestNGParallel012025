@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite Demo Parallel DataProvider" verbose="1">
+   <test name="Login Test" parallel="methods" thread-count="2">
+      <classes>
+         <class name="com.anhtester.Bai29_DataProvider.DemoDataProvider">
+
+         </class>
+      </classes>
+   </test>
+</suite>
