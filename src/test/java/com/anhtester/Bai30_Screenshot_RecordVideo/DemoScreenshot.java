@@ -10,6 +10,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.io.FileHandler;
 import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -20,12 +22,11 @@ public class DemoScreenshot extends BaseTest {
    @Test
    public void testTakeScreenshot(Method method) {
       WebUI.openURL("https://anhtester.com");
-      Assert.assertEquals(DriverManager.getDriver().getTitle(), "Anh Tester Automation Testing");
+      Assert.assertEquals(DriverManager.getDriver().getTitle(), "123Anh Tester Automation Testing");
       CaptureHelper.takeScreenshot("IMG_HomePage");
       WebUI.clickElement(By.xpath("//a[@id='btn-login']"));
       WebUI.waitForPageLoaded();
-      //Chụp ảnh màn hình và lưu vào thư mục "screenshots"
       CaptureHelper.takeScreenshot(method.getName() + "_" + SystemHelper.getDateTimeNowFormat());
-      System.out.println("Screenshot success !!");
    }
+
 }
