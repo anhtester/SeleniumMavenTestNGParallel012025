@@ -1,8 +1,10 @@
-package com.anhtester.Bai30_Screenshot_RecordVideo.testcases;
+package com.anhtester.Bai31_TestListener.testcases;
 
-import com.anhtester.Bai30_Screenshot_RecordVideo.pages.LoginPage;
+import com.anhtester.Bai31_TestListener.pages.LoginPage;
 import com.anhtester.common.BaseTest;
-import com.anhtester.helpers.CaptureHelper;
+import com.anhtester.listeners.TestListener;
+import org.testng.SkipException;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
@@ -11,10 +13,9 @@ public class LoginTest extends BaseTest {
 
    @Test(priority = 1)
    public void testLoginSuccess() {
-      CaptureHelper.startRecord("testLoginSuccess");
       loginPage = new LoginPage();
 
-      loginPage.loginCRM("admin@example.com", "123456");
+      loginPage.loginCRM("admin@example.com", "12345678");
       loginPage.verifyLoginSuccess();
    }
 
@@ -44,10 +45,11 @@ public class LoginTest extends BaseTest {
 
    @Test(priority = 5)
    public void testLoginFailureWithPasswordNull() {
-      loginPage = new LoginPage();
-      loginPage.loginCRM("admin@example.com", "");
-
-      loginPage.verifyLoginFailureWithPasswordNull();
+      throw new SkipException("Skipping The Test Method ");
+//      loginPage = new LoginPage();
+//      loginPage.loginCRM("admin@example.com", "");
+//
+//      loginPage.verifyLoginFailureWithPasswordNull();
    }
 
 }

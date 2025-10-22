@@ -4,6 +4,7 @@ import com.anhtester.drivers.DriverManager;
 import com.anhtester.helpers.CaptureHelper;
 import com.anhtester.helpers.PropertiesHelper;
 import com.anhtester.helpers.SystemHelper;
+import com.anhtester.listeners.TestListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,6 +15,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
+@Listeners(TestListener.class)
 public class BaseTest {
    public SoftAssert softAssert;
 
@@ -72,13 +74,6 @@ public class BaseTest {
 
    @AfterMethod(alwaysRun = true)
    public void closeDriver(ITestResult result) {
-
-      if (ITestResult.FAILURE == result.getStatus()) {
-         CaptureHelper.takeScreenshot(result.getName() + "_" + SystemHelper.getDateTimeNowFormat());
-      }
-
-      CaptureHelper.stopRecord();
-
       if (DriverManager.getDriver() != null) {
          DriverManager.quit();
          softAssert.assertAll();
