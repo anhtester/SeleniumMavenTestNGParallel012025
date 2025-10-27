@@ -1,5 +1,7 @@
 package com.anhtester.helpers;
 
+import com.anhtester.utils.LogUtils;
+
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class SystemHelper {
    public static String getCurrentDir() {
       String current = System.getProperty("user.dir") + File.separator;
+      LogUtils.info("Current Directory: " + current);
       return current;
    }
 
