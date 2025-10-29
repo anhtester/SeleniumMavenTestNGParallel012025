@@ -2,7 +2,9 @@ package com.anhtester.keywords;
 
 import com.anhtester.drivers.DriverManager;
 import com.anhtester.helpers.PropertiesHelper;
+import com.anhtester.reports.ExtentTestManager;
 import com.anhtester.utils.LogUtils;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -216,30 +218,35 @@ public class WebUI {
       DriverManager.getDriver().get(url);
       sleep(STEP_TIME);
       LogUtils.info("Open URL:  " + url);
+      ExtentTestManager.logMessage(Status.PASS, "Open URL: " + url);
    }
 
    public static void clickElement(By by) {
       sleep(STEP_TIME);
       waitForElementToBeClickable(by).click();
       LogUtils.info("Click on element " + by);
+      ExtentTestManager.logMessage(Status.PASS, "Click on element " + by);
    }
 
    public static void clickElement(By by, int seconds) {
       sleep(STEP_TIME);
       waitForElementToBeClickable(by, seconds).click();
       LogUtils.info("Click on element " + by);
+      ExtentTestManager.logMessage(Status.PASS, "Click on element " + by);
    }
 
    public static void setText(By by, String text) {
       sleep(STEP_TIME);
       waitForElementVisible(by).sendKeys(text);
       LogUtils.info("Set text " + text + " on element " + by);
+      ExtentTestManager.logMessage(Status.PASS, "Set text " + text + " on element " + by);
    }
 
    public static void setText(By by, String text, int seconds) {
       sleep(STEP_TIME);
       waitForElementVisible(by, seconds).sendKeys(text);
       LogUtils.info("Set text " + text + " on element " + by);
+      ExtentTestManager.logMessage(Status.PASS, "Set text " + text + " on element " + by);
    }
 
    public static String getElementText(By by) {
@@ -248,6 +255,8 @@ public class WebUI {
       LogUtils.info("Get text of element " + by);
       String text = getWebElement(by).getText();
       LogUtils.info("==> TEXT: " + text);
+      ExtentTestManager.logMessage(Status.PASS, "Get text of element " + by);
+      ExtentTestManager.logMessage(Status.INFO, "==> Text: " + text);
       return text; //Trả về một giá trị kiểu String
    }
 
@@ -256,6 +265,8 @@ public class WebUI {
       LogUtils.info("Get attribute of element " + by);
       String value = getWebElement(by).getAttribute(attributeName);
       LogUtils.info("==> Attribute value: " + value);
+      ExtentTestManager.logMessage(Status.PASS, "Get attribute of element " + by);
+      ExtentTestManager.logMessage(Status.INFO, "==> Attribute value: " + value);
       return value;
    }
 
