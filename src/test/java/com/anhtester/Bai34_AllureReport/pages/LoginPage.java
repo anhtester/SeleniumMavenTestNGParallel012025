@@ -1,4 +1,4 @@
-package com.anhtester.Bai32_Log4j.pages;
+package com.anhtester.Bai34_AllureReport.pages;
 
 import com.anhtester.helpers.PropertiesHelper;
 import com.anhtester.keywords.WebUI;

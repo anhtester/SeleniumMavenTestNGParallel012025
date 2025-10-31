@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite Allure Report" parallel="methods">
+   <test name="Demo Allure Report 1">
+      <classes>
+         <class name="com.anhtester.Bai34_AllureReport.testcases.LoginTest"/>
+      </classes>
+   </test>
+   <test name="Demo Allure Report 2">
+      <classes>
+         <class name="com.anhtester.Bai34_AllureReport.testcases.DashboardTest"/>
+         <class name="com.anhtester.Bai34_AllureReport.testcases.LeadsTest"/>
+      </classes>
+   </test>
+</suite>

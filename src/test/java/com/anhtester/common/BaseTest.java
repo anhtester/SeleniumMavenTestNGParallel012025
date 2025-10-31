@@ -1,9 +1,7 @@
 package com.anhtester.common;
 
 import com.anhtester.drivers.DriverManager;
-import com.anhtester.helpers.CaptureHelper;
 import com.anhtester.helpers.PropertiesHelper;
-import com.anhtester.helpers.SystemHelper;
 import com.anhtester.listeners.TestListener;
 import com.anhtester.utils.LogUtils;
 import org.openqa.selenium.WebDriver;
@@ -25,14 +23,14 @@ public class BaseTest {
    }
 
    @BeforeMethod
-   @Parameters({"browser"})
+   @Parameters({"BROWSER"})
    public void createDriver(@Optional("chrome") String browserName) {
       WebDriver driver;
 
-      if (PropertiesHelper.getValue("browser").isEmpty() || PropertiesHelper.getValue("browser") == null) {
+      if (PropertiesHelper.getValue("BROWSER").isEmpty() || PropertiesHelper.getValue("BROWSER") == null) {
          browserName = browserName;
       } else {
-         browserName = PropertiesHelper.getValue("browser");
+         browserName = PropertiesHelper.getValue("BROWSER");
       }
 
       switch (browserName.trim().toLowerCase()) {
@@ -41,9 +39,9 @@ public class BaseTest {
 
             ChromeOptions options = new ChromeOptions();
 
-            if (PropertiesHelper.getValue("headless").equalsIgnoreCase("true")) {
+            if (PropertiesHelper.getValue("HEADLESS").equalsIgnoreCase("true")) {
                options.addArguments("--headless=new"); // chạy headless
-               options.addArguments("--window-size=" + PropertiesHelper.getValue("window_size")); // set kích thước
+               options.addArguments("--window-size=" + PropertiesHelper.getValue("WINDOW_SIZE")); // set kích thước
             }
 
             driver = new ChromeDriver(options);
@@ -64,7 +62,7 @@ public class BaseTest {
 
       DriverManager.setDriver(driver);
 
-      if (PropertiesHelper.getValue("headless").equalsIgnoreCase("false")) {
+      if (PropertiesHelper.getValue("HEADLESS").equalsIgnoreCase("false")) {
          DriverManager.getDriver().manage().window().maximize();
       }
 

@@ -29,7 +29,7 @@ public class LoginPage extends BasePage {
    }
 
    public void navigateToLoginAdminPage() {
-      WebUI.openURL(PropertiesHelper.getValue("url"));
+      WebUI.openURL(PropertiesHelper.getValue("URL"));
       WebUI.waitForPageLoaded();
    }
 
@@ -55,8 +55,8 @@ public class LoginPage extends BasePage {
 
    public DashboardPage loginCRM() {
       navigateToLoginAdminPage();
-      enterEmail(PropertiesHelper.getValue("email"));
-      enterPassword(PropertiesHelper.getValue("password"));
+      enterEmail(PropertiesHelper.getValue("EMAIL"));
+      enterPassword(PropertiesHelper.getValue("PASSWORD"));
       clickLoginButton();
       WebUI.waitForPageLoaded();
       verifyLoginSuccess();
