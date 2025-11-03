@@ -1,6 +1,7 @@
 package com.anhtester.listeners;
 
 import com.anhtester.helpers.CaptureHelper;
+import com.anhtester.helpers.PropertiesHelper;
 import com.anhtester.reports.AllureManager;
 import com.anhtester.reports.ExtentReportManager;
 import com.anhtester.reports.ExtentTestManager;
@@ -43,7 +44,9 @@ public class TestListener implements ITestListener {
       LogUtils.info("Bắt đầu chạy test case: " + result.getName());
       //count_total++;
       //Write log to file
-      CaptureHelper.startRecord(result.getName());
+      if(PropertiesHelper.getValue("VIDEO_RECORD").equals("true")) {
+         CaptureHelper.startRecord(result.getName());
+      }
 
       //Bắt đầu ghi 1 TCs mới vào Extent Report
       ExtentTestManager.saveToReport(getTestName(result), getTestDescription(result));
@@ -57,9 +60,13 @@ public class TestListener implements ITestListener {
       //Write log to file
       //Write status to report
       //Extent Report
-      ExtentTestManager.logMessage(Status.PASS, result.getName() + " is passed.");
+      if(PropertiesHelper.getValue("SCREENSHOT_SUCCESS").equals("true")) {
+         ExtentTestManager.logMessage(Status.PASS, result.getName() + " is passed.");
+      }
 
-      CaptureHelper.stopRecord();
+      if(PropertiesHelper.getValue("VIDEO_RECORD").equals("true")) {
+         CaptureHelper.stopRecord();
+      }
    }
 
    @Override
@@ -73,15 +80,15 @@ public class TestListener implements ITestListener {
       //Write log to file
       //Write status to report
       //Extent Report
-      ExtentTestManager.addScreenshot(result.getName());
+      if(PropertiesHelper.getValue("SCREENSHOT_FAILURE").equals("true")) {
+         ExtentTestManager.addScreenshot(result.getName());
+      }
       ExtentTestManager.logMessage(Status.FAIL, result.getThrowable().toString());
       ExtentTestManager.logMessage(Status.FAIL, result.getName() + " is failed.");
 
-      //Allure Report
-      AllureManager.saveTextLog(result.getName() + " is failed.");
-      AllureManager.saveScreenshotPNG();
-
-      CaptureHelper.stopRecord();
+      if(PropertiesHelper.getValue("VIDEO_RECORD").equals("true")) {
+         CaptureHelper.stopRecord();
+      }
    }
 
    @Override
@@ -94,6 +101,8 @@ public class TestListener implements ITestListener {
       ExtentTestManager.logMessage(Status.SKIP, result.getThrowable().toString());
       ExtentTestManager.logMessage(Status.SKIP, result.getName() + " is skipped.");
 
-      CaptureHelper.stopRecord();
+      if(PropertiesHelper.getValue("VIDEO_RECORD").equals("true")) {
+         CaptureHelper.stopRecord();
+      }
    }
 }

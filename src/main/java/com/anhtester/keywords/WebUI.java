@@ -1,5 +1,6 @@
 package com.anhtester.keywords;
 
+import com.anhtester.constants.DataConfig;
 import com.anhtester.drivers.DriverManager;
 import com.anhtester.helpers.PropertiesHelper;
 import com.anhtester.helpers.SystemHelper;
@@ -20,11 +21,9 @@ import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.List;
 
-public class WebUI {
+import static com.anhtester.constants.DataConfig.*;
 
-   private static int WAIT_TIMEOUT = Integer.parseInt(PropertiesHelper.getValue("WAIT_TIMEOUT"));
-   private static double STEP_TIME = Double.parseDouble(PropertiesHelper.getValue("STEP_TIME"));
-   private static int PAGE_LOAD_TIMEOUT = Integer.parseInt(PropertiesHelper.getValue("PAGE_LOAD_TIMEOUT"));
+public class WebUI {
 
    public static void logConsole(Object message) {
       System.out.println(message);
@@ -224,7 +223,7 @@ public class WebUI {
       LogUtils.info("Open URL:  " + url);
       ExtentTestManager.logMessage(Status.PASS, "Open URL: " + url);
 
-      if (PropertiesHelper.getValue("SCREENSHOT_ALL_STEP").equals("true")) {
+      if (SCREENSHOT_ALL_STEP.equals("true")) {
          ExtentTestManager.addScreenshot("openURL_" + SystemHelper.getDateTimeNowFormat());
          AllureManager.saveScreenshotPNG();
       }
@@ -237,7 +236,7 @@ public class WebUI {
       waitForElementToBeClickable(by).click();
       LogUtils.info("Click on element " + by);
       ExtentTestManager.logMessage(Status.PASS, "Click on element " + by);
-      if (PropertiesHelper.getValue("SCREENSHOT_ALL_STEP").equals("true")) {
+      if (SCREENSHOT_ALL_STEP.equals("true")) {
          ExtentTestManager.addScreenshot("clickElement_" + SystemHelper.getDateTimeNowFormat());
          AllureManager.saveScreenshotPNG();
       }
